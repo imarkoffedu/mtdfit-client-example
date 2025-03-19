@@ -4,6 +4,6 @@ ktor:
             - com.imarkoff.ApplicationKt.module
     client:
         protocol: http
-        host: localhost
+        host: localhost # required
         port: 8080
-        path: /api
+        path: /api/
