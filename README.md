@@ -1,3 +1,6 @@
+## Honorable mention
+![ну там картінка дуже прикольна чо ви](./honorable-mention.png)
+
 # mtdfit-client-sample
 
 This project was created using the [Ktor Project Generator](https://start.ktor.io).
