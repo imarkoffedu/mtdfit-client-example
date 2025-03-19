@@ -1,8 +1,9 @@
 package com.imarkoff.services
 
 import com.imarkoff.client.TokenStorage
-import com.imarkoff.schemas.LoginDto
+import com.imarkoff.schemas.ClientDto
 import io.ktor.client.HttpClient
+import io.ktor.client.call.body
 import io.ktor.client.plugins.cookies.cookies
 import io.ktor.client.request.get
 import io.ktor.client.request.post
@@ -13,9 +14,13 @@ import io.ktor.client.statement.request
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
+import kotlinx.serialization.Serializable
 
+/**
+ * Service for managing authentication APIs.
+ */
 class AuthService(private val client: HttpClient) {
-    suspend fun login(dto: LoginDto) {
+    suspend fun login(dto: LoginRequest) {
         val response = client.post("auth/login") {
             contentType(ContentType.Application.Json)
             setBody(dto)
@@ -31,9 +36,9 @@ class AuthService(private val client: HttpClient) {
     /**
      * Gets the current user. Needs to be authenticated.
      */
-    suspend fun getMe() {
+    suspend fun getMe(): GetMeResponse {
         val response = client.get("auth/me")
-        println(response.bodyAsText())
+        return response.body()
     }
 
     private suspend fun saveTokens(response: HttpResponse) {
@@ -47,3 +52,15 @@ class AuthService(private val client: HttpClient) {
         TokenStorage.getInstance().storeTokens(accessToken, refreshToken)
     }
 }
+
+@Serializable
+data class LoginRequest(
+    val email: String,
+    val password: String
+)
+
+@Serializable
+data class GetMeResponse(
+    val entity: ClientDto,
+    val isFinallyRegistered: Boolean = false
+)
