@@ -2,5 +2,8 @@ ktor:
     application:
         modules:
             - com.imarkoff.ApplicationKt.module
-    deployment:
+    client:
+        protocol: http
+        host: localhost
         port: 8080
+        path: /api
