@@ -14,5 +14,7 @@ class LoginView(private val client: HttpClient): IView {
 
         val authService = AuthService(client)
         authService.login(LoginRequest(email, password))
+
+        println("Please rerun the application to see the changes.")
     }
 }

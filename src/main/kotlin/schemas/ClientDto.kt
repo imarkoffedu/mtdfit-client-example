@@ -5,6 +5,7 @@ import com.imarkoff.schemas.enums.HealthState
 import com.imarkoff.schemas.enums.PhysicalActivityLevel
 import com.imarkoff.schemas.enums.TrainingExperienceLevel
 import com.imarkoff.schemas.enums.TrainingGoal
+import com.imarkoff.utils.DateString
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -21,8 +22,8 @@ data class ClientDto (
     val note: String?,
     val trainingPlan: TrainingPlanShortDto?,
     val activeWorkoutSession: String?, // uuid
-    val dateAssigned: String, // ISO 8601
-    val dateModified: String?, // ISO 8601
+    val dateAssigned: DateString,
+    val dateModified: DateString?,
 
     override val account: AccountDto,
     override val phoneNumber: String,

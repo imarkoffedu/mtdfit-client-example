@@ -1,6 +1,6 @@
 package com.imarkoff.client
 
-import com.imarkoff.services.AuthService
+import com.imarkoff.services.TokenService
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.UserAgent
@@ -85,8 +85,8 @@ class ClientFactory(
                     TokenStorage.getInstance().getTokens()
                 }
                 refreshTokens {
-                    val authService = AuthService(client)
-                    authService.refreshToken()
+                    val tokenService = TokenService(client)
+                    tokenService.refreshToken()
                     TokenStorage.getInstance().getTokens()
                 }
             }
